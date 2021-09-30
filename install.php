@@ -1,16 +1,4 @@
-<?php
-    if (!isset($_GET['step']))
-    {
-        $step=0;
-    }
-    else
-    {
-        $step=$_GET['step'];
-        if($step==2) {
-            /* Do this */
-        }
-    }
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Saturn Installer</title>
@@ -222,17 +210,29 @@
                         This should only take a few moments.
                     </p>
                     <i class="far fa-sync-alt fa-spin"></i>
-                    <span class="text-base"><br>
-                        <?php
-                    $con = mysqli_connect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_name']);
-                    echo'-->';
-                    // Check connection
-                    if (mysqli_connect_errno()) {
-                        header('Location: install.php?error=Unable to connect to the Database: '.mysqli_connect_error());
-                    } else {
-                        header('Location: install.php?step=3');
-                    }
-                ?></span></div>
+                    <?php
+                        $con = mysqli_connect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_name']);
+                        // Check connection
+                        if (mysqli_connect_errno()) {
+                            header('Location: install.php?error=Unable to connect to the Database: '.mysqli_connect_error());
+                        } else {
+                            header('Location: install.php?step=install');
+                        }
+                    ?>
+                </div>
+            </div>
+            <?php } elseif ($_GET['step'] == 'install') { ?>
+            <div class="h-screen">
+                <div class="overflow-scroll my-28 h-5/6 m-auto text-white text-center bg-white bg-opacity-10 px-10 py-10 rounded-md overflow-y-scroll">
+                    <center><img src="https://service.lmwn.co.uk/brandkit/saturn/logo.png" class="w-1/4 mb-6" alt="Saturn"></center>
+                    <h1 class="text-3xl md:text-5xl my-10">
+                        Installing Saturn
+                    </h1>
+                    <p class="text-base mb-10">
+                        This should only take a few moments.
+                    </p>
+                    <i class="far fa-sync-alt fa-spin"></i>
+                </div>
             </div>
             <?php
         }
