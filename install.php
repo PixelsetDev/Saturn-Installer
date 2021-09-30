@@ -1,6 +1,10 @@
 <?php
-    if(!isset($_GET['step'])){$step=0;}
-    else {
+    if (!isset($_GET['step']))
+    {
+        $step=0;
+    }
+    else
+    {
         $step=$_GET['step'];
         if($step==2) {
             /* Do this */
@@ -32,7 +36,9 @@
             <div class="particle particle-4"></div>
         </div>
 
-        <div class="page-wrapper z-40 sm:hidden block">Please use a larger screen to setup Saturn.</div>
+        <div class="page-wrapper z-40 sm:hidden block">
+            Please use a larger screen to setup Saturn.
+        </div>
         <div class="page-wrapper z-40 sm:block hidden">
             <div class="absolute bottom-0 right-0">
                 <a href="https://saturncms.net/feedback" target="_blank" class="relative group flex" title="Feedback">
@@ -51,55 +57,52 @@
                         <p class="text-base my-4">
                             '.htmlspecialchars(addslashes($_GET['error'])).'
                         </p>
-                    <a href="installer.php" class="py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                    <a href="install.php" class="py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                         Retry
                     </a>
                 </div>
             </div>'; exit;
         }
-        if (!isset($_GET['step'])) { echo '<div class="flex h-screen">
+        if (!isset($_GET['step'])) { ?>
+            <div class="flex h-screen">
                 <div class="m-auto text-white text-center">
                     <center><img src="https://service.lmwn.co.uk/brandkit/saturn/logo.png" class="w-1/4 mb-6" alt="Saturn"></center>
                     <h1 class="text-3xl md:text-5xl">
                         Welcome to Saturn CMS
                     </h1>
-                    <a href="installer.php?step=setup" class="py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                    <a href="install.php?step=setup" class="py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                         Install BETA 1.0.0
                     </a>
                 </div>
-            </div>'; } else if ($_GET['step'] == 'setup' ){ echo '<div class="h-screen max-w-7xl">
-                <div class="overflow-scroll my-28 h-5/6 m-auto text-white text-center bg-white bg-opacity-10 px-10 py-10 rounded-md overflow-y-scroll">
-                    <form action="installer.php?step=check" method="POST" x-data="{ tab: \'activate\' }">
+            </div>
+            <?php } elseif ($_GET['step'] == 'setup' ) { ?>
+            <div class="h-screen max-w-7xl">
+                <div class="overflow-x-hidden overflow-y-scroll my-28 h-5/6 m-auto text-white text-center bg-white bg-opacity-10 px-10 py-10 rounded-md">
+                    <form action="install.php?step=check" method="POST" x-data="{ tab: 'activate' }">
                         <center><img src="https://service.lmwn.co.uk/brandkit/saturn/logo.png" class="w-1/4 mb-6" alt="Saturn"></center>
-                        <div x-show="tab === \'activate\'">
+                        <div x-show="tab === 'activate'">
                             <h1 class="text-3xl md:text-5xl my-10">
                                 Activate Saturn
                             </h1>
                             <p class="text-base mb-10">
-                                You can get a code from saturncms.net/get
+                                You can get a code from saturncms.net/get if you do not already have one.
                             </p>
                             <div class="rounded-md shadow-sm -space-y-px">
                                 <div class="flex">
                                     <label for="activation" class="text-base w-1/4">Activation Key</label>
-                                    <input id="activation" name="activation" type="activation" class="appearance-none rounded-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="XXXX-XXXX-XXXX-XXXX" required>
-                                </div>
-                            </div>
-                            <div class="rounded-md shadow-sm -space-y-px">
-                                <div class="flex w-1/2 space-x-2 m-6">
-                                    <a class="py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Check</a>
-                                    <span id="activation-check" class="w-3/4 text-red-500 text-base">Not Activated</span>
+                                    <input id="activation" name="activation" type="activation" value="<?php echo htmlspecialchars($_GET['activation']); ?>" class="appearance-none rounded-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="XXXX-XXXX-XXXX-XXXX" required>
                                 </div>
                             </div>
                             <div class="flex w-1/2 space-x-2 m-6">
-                                <a :class="{ \'active\': tab === \'welcome\' }" @click.prevent="tab = \'welcome\'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Next</a>
+                                <a :class="{ 'active': tab === 'welcome' }" @click.prevent="tab = 'welcome'" class="cursor-pointer flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Next</a>
                             </div>
                         </div>
-                        <div x-show="tab === \'welcome\'">
+                        <div x-show="tab === 'welcome'">
                             <h1 class="text-3xl md:text-5xl my-10">
                                 Website Information.
                             </h1>
                             <p class="text-base mb-10">
-                                This is basic information that we\'ll use to setup your website.
+                                This is basic information that we'll use to setup your website.
                             </p>
                             <div class="rounded-md shadow-sm -space-y-px">
                                 <div class="flex">
@@ -124,20 +127,20 @@
                                 </div>
                                 <div class="flex">
                                     <label for="email_sendfrom" class="text-base w-1/4">Sendfrom Email <a title="Saturn sometimes needs to send emails to your users, let us know what email you\'d like us to send that email from. Saturn has automatically generated a recommended value for this item." class="text-xs border-b-2 border-dotted">?</a></label>
-                                    <input id="email_sendfrom" name="email_sendfrom" type="email" autocomplete="email" class="appearance-none rounded-b-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" value="noreply@'.$_SERVER['HTTP_HOST'].'" required>
+                                    <input id="email_sendfrom" name="email_sendfrom" type="email" autocomplete="email" class="appearance-none rounded-b-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" value="noreply@<?php echo $_SERVER['HTTP_HOST']; ?>" required>
                                 </div>
                             </div>
                             <div class="flex w-1/2 space-x-2 m-6">
-                                <a :class="{ \'active\': tab === \'activate\' }" @click.prevent="tab = \'activate\'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Previous</a>
-                                <a :class="{ \'active\': tab === \'account\' }" @click.prevent="tab = \'account\'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Next</a>
+                                <a :class="{ 'active': tab === 'activate' }" @click.prevent="tab = 'activate'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Previous</a>
+                                <a :class="{ 'active': tab === 'account' }" @click.prevent="tab = 'account'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Next</a>
                             </div>
                         </div>
-                        <div x-show="tab === \'account\'">
+                        <div x-show="tab === 'account'">
                             <h1 class="text-3xl md:text-5xl my-10">
                                 Your account.
                             </h1>
                             <p class="text-base mb-10">
-                                Let\'s create your account.
+                                Let's create your account.
                             </p>
                             <div class="rounded-md shadow-sm -space-y-px">
                                 <div class="flex">
@@ -162,16 +165,16 @@
                                 </div>
                             </div>
                             <div class="flex w-1/2 space-x-2 m-6">
-                                <a :class="{ \'active\': tab === \'welcome\' }" @click.prevent="tab = \'welcome\'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Previous</a>
-                                <a :class="{ \'active\': tab === \'database\' }" @click.prevent="tab = \'database\'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Next</a>
+                                <a :class="{ 'active': tab === 'welcome' }" @click.prevent="tab = 'welcome'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Previous</a>
+                                <a :class="{ 'active': tab === 'database' }" @click.prevent="tab = 'database'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Next</a>
                             </div>
                         </div>
-                        <div x-show="tab === \'database\'">
+                        <div x-show="tab === 'database'">
                             <h1 class="text-3xl md:text-5xl my-10">
                                 Database Settings.
                             </h1>
                             <p class="text-base mb-10">
-                                Saturn requires an SQL Database to store data.<br>Don\'t worry, you don\'t need to make the tables, we\'ll do that for you.
+                                Saturn requires an SQL Database to store data.<br>Don't worry, you don't need to make the tables, we'll do that for you.
                             </p>
                             <div class="rounded-md shadow-sm -space-y-px">
                                 <div class="flex">
@@ -196,18 +199,20 @@
                                 </div>
                                 <div class="flex">
                                     <label for="db_prefix" class="text-base w-1/4">Prefix <a title="A value added to the start of the database\'s tables to group them to Saturn. Saturn has automatically generated a recommended value for this item." class="text-xs border-b-2 border-dotted">?</a></label>
-                                    <input id="db_prefix" name="db_prefix" type="text" autocomplete="db_prefix" class="appearance-none rounded-none rounded-b-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="" value="'.substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyz", 3)), 0, 3).'_">
+                                    <input id="db_prefix" name="db_prefix" type="text" autocomplete="db_prefix" class="appearance-none rounded-none rounded-b-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="" value="<?php echo substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyz", 3)), 0, 3).'_'; ?>">
                                 </div>
                             </div>
                             <style>form:invalid [type=submit] { background-color: rgba(239, 68, 68); } form:valid [type=submit] { background-color: rgba(16, 185, 129); }</style>
                             <div class="flex w-1/2 space-x-2 m-6">
-                                <a :class="{ \'active\': tab === \'account\' }" @click.prevent="tab = \'account\'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Previous</a>
+                                <a :class="{ 'active': tab === 'account' }" @click.prevent="tab = 'account'" class="flex-grow py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Previous</a>
                                 <input type="submit" value="Submit" class="py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg">
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>'; } else if ($_GET['step'] == 'check') { echo '<div class="h-screen">
+            </div>
+            <?php } elseif ($_GET['step'] == 'check') { ?>
+            <div class="h-screen">
                 <div class="overflow-scroll my-28 h-5/6 m-auto text-white text-center bg-white bg-opacity-10 px-10 py-10 rounded-md overflow-y-scroll">
                     <center><img src="https://service.lmwn.co.uk/brandkit/saturn/logo.png" class="w-1/4 mb-6" alt="Saturn"></center>
                     <h1 class="text-3xl md:text-5xl my-10">
@@ -217,17 +222,19 @@
                         This should only take a few moments.
                     </p>
                     <i class="far fa-sync-alt fa-spin"></i>
-                    <span class="text-base"><br><!--';
+                    <span class="text-base"><br>
+                        <?php
                     $con = mysqli_connect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_name']);
                     echo'-->';
                     // Check connection
                     if (mysqli_connect_errno()) {
-                        header('Location: installer.php?error=Unable to connect to the Database: '.mysqli_connect_error());
+                        header('Location: install.php?error=Unable to connect to the Database: '.mysqli_connect_error());
                     } else {
-                        header('Location: installer.php?step=3');
+                        header('Location: install.php?step=3');
                     }
-                echo '</span></div>
-            </div>';
+                ?></span></div>
+            </div>
+            <?php
         }
         ?>
         </div>
