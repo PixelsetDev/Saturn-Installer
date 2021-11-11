@@ -420,7 +420,7 @@ if (isset($_POST['submit'])) {
                     var_dump($query);
                 }
                 $query = INSERT_COMMAND.' `'.$data->db_prefix."pages` (`id`, `user_id`, `category_id`, `url`, `template`, `title`, `description`, `content`, `reference`) VALUES
-        (1, 1, 1, '/', 'HOMEPAGE', 'Home', 'Home', '<p>Welcome to Saturn!</p>', '');";
+        (1, 1, 1, '/', 'HOMEPAGE', 'Home', 'Home', '<p>Welcome to Saturn - the Content Management System for educators, publishers, writers, creatives, developers, and everyone in between.<br><br>We&apos;re super excited that you&apos;ve decided to use Saturn on your website, so let&apos;s get started.<br><br>You can edit you website in the Saturn Control Panel, to find this navigate to example.com/panel, some themes (such as our default theme Andromeda) may also have a link to the panel in the footer. The control panel allows you to manage the website&apos;s content, view your statistics, see your profile and the profile of others plus so much more.<br><br>You can also visit the Admin Panel by clicking on your profile photo in the control panel and selecting website settings or by navigating there manually (example.com/panel/admin). The admin panel allows you to manage the website&apos; settings, users along with your website&apos; branding (that includes your site logo, which is currently not set - you should set that soon!).<br><br>If you need any assistance please email support@lmwn.co.uk or visit docs.saturncms.net<br><br>Thank you for using Saturn.</p>', '');";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT INTO PAGES';
                     var_dump($query);
