@@ -487,7 +487,7 @@ if (isset($_POST['submit'])) {
           `bio` varchar(100) DEFAULT NULL,
           `organisation` varchar(100) DEFAULT NULL,
           `website` varchar(255) DEFAULT NULL,
-          `profile_photo` varchar(20000) NOT NULL DEFAULT '/assets/storage/images/defaultprofile.png',
+          `profile_photo` varchar(20000) NOT NULL DEFAULT '/storage/images/defaultprofile.png',
            PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 if (!mysqli_query($conn, $query)) {
