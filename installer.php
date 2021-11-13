@@ -415,6 +415,21 @@ if (isset($_POST['submit'])) {
           `reference` varchar(10000) DEFAULT NULL,
            PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                $query = CREATE_COMMAND.' `'.$data->db_prefix."pages` (
+          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `user_id` int(11) NOT NULL,
+          `category_id` int(11) DEFAULT NULL,
+          `url` varchar(255) DEFAULT NULL,
+          `template` varchar(20) NOT NULL DEFAULT 'DEFAULT',
+          `title` varchar(100) DEFAULT NULL,
+          `description` varchar(255) DEFAULT NULL,
+          `content` varchar(50000) DEFAULT NULL,
+          `reference` varchar(10000) DEFAULT NULL,
+          `image_url` varchar(255) DEFAULT NULL,
+          `image_credit` varchar(64) DEFAULT NULL,
+          `image_license` varchar(64) NOT NULL
+           PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE PAGES';
                     var_dump($query);
