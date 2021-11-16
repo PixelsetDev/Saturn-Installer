@@ -4,6 +4,8 @@
     const INSTALLER_CONFIG_FILE = 'installer_config.json';
     const CREATE_COMMAND = 'CREATE TABLE';
     const INSERT_COMMAND = 'INSERT INTO';
+    
+    $key = file_get_contents('key.txt');
 
 function downloadSaturnFile($downloadUrl, $downloadTo, $deleteArchive = true): bool
 {
@@ -147,13 +149,7 @@ if (isset($_POST['submit'])) {
                                     <div class="rounded-md shadow-sm -space-y-px">
                                         <div class="flex">
                                             <label for="activation" class="text-base w-1/4">Activation Key</label>
-                                            <input id="activation" name="activation" type="activation" class="appearance-none rounded-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="XXXX-XXXX-XXXX-XXXX" required>
-                                        </div>
-                                    </div>
-                                    <div class="rounded-md shadow-sm -space-y-px">
-                                        <div class="flex w-1/2 space-x-2 m-6">
-                                            <a class="py-2 px-4 bg-gray-600 hover:bg-gray-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Check</a>
-                                            <span id="activation-check" class="w-3/4 text-red-500 text-base">Not Activated</span>
+                                            <input id="activation" name="activation" type="activation" value="'.$key.'" class="appearance-none rounded-md relative block w-3/4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="XXXX-XXXX-XXXX-XXXX" required>
                                         </div>
                                     </div>
                                     <div class="flex w-1/2 space-x-2 m-6">
@@ -402,7 +398,7 @@ if (isset($_POST['submit'])) {
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE NOTIFICATIONS';
                     var_dump($query);
-                }
+                } 
                 $query = CREATE_COMMAND.' `'.$data->db_prefix."pages` (
           `id` int(11) NOT NULL AUTO_INCREMENT,
           `user_id` int(11) NOT NULL,
@@ -415,6 +411,10 @@ if (isset($_POST['submit'])) {
           `reference` varchar(10000) DEFAULT NULL,
            PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                if (!mysqli_query($conn, $query)) {
+                    echo '<br><br>UNABLE TO QUERY: CREATE PAGES';
+                    var_dump($query);
+                }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix."pages` (
           `id` int(11) NOT NULL AUTO_INCREMENT,
           `user_id` int(11) NOT NULL,
@@ -494,7 +494,7 @@ if (isset($_POST['submit'])) {
           `email` varchar(255) NOT NULL,
           `password` varchar(512) DEFAULT NULL,
           `user_key` varchar(512) DEFAULT NULL,
-          `last_login_ip` varchar(512) DEFAULT NULL,
+          `last_login_ip` varchar(512) NOT NULL DEFAULT '000.000.0.0',
           `auth_code` varchar(6) DEFAULT NULL,
           `role_id` int(1) DEFAULT NULL,
           `last_seen` datetime NOT NULL DEFAULT current_timestamp(),
@@ -522,6 +522,18 @@ if (isset($_POST['submit'])) {
                     echo '<br><br>UNABLE TO QUERY: CREATE USER SETTINGS';
                     var_dump($query);
                 }
+                $query = INSERT_COMMAND.' `'.$data->db_prefix."users_settings` (
+                `id`, `notifications_saturn`,
+                `notifications_email`,
+                `privacy_abbreviate_surname`,
+                `security_2fa`,
+                `accepted_terms`)
+                VALUES
+                (NULL, '1', '0', '0', '0', '0')";
+                if (!mysqli_query($conn, $query)) {
+                    echo '<br><br>UNABLE TO QUERY: INSERT INTO USER SETTINGS';
+                    var_dump($query);
+                }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'users_statistics` (
           `id` int(11) NOT NULL AUTO_INCREMENT,
           `views` int(11) NOT NULL DEFAULT 0,
@@ -533,9 +545,14 @@ if (isset($_POST['submit'])) {
                     echo '<br><br>UNABLE TO QUERY: CREATE USER STATISTICS';
                     var_dump($query);
                 }
+                $query = INSERT_COMMAND.' `'.$data->db_prefix."users_statistics` (`id`, `views`, `edits`, `approvals`) VALUES (NULL, '0', '0', '0')";
+                if (!mysqli_query($conn, $query)) {
+                    echo '<br><br>UNABLE TO QUERY: INSERT INTO USER STATISTICS';
+                    var_dump($query);
+                }
                 echo'</span>';
 
-                $query = INSERT_COMMAND.' `'.$data->db_prefix."users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `user_key`, `last_login_ip`, `auth_code`, `role_id`, `last_seen`, `first_login`, `bio`, `organisation`, `website`, `profile_photo`) VALUES (NULL, '".$data->user_username."', '".$data->user_firstname."', '".$data->user_lastname."', '".$data->user_email."', '".$data->user_password."', NULL, NULL, NULL, '4', current_timestamp(), '1', NULL, NULL, NULL, '/assets/storage/images/defaultprofile.png')";
+                $query = INSERT_COMMAND.' `'.$data->db_prefix."users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `user_key`, `last_login_ip`, `auth_code`, `role_id`, `last_seen`, `first_login`, `bio`, `organisation`, `website`, `profile_photo`) VALUES (NULL, '".$data->user_username."', '".$data->user_firstname."', '".$data->user_lastname."', '".$data->user_email."', '".$data->user_password."', NULL, NULL, NULL, '4', current_timestamp(), '1', NULL, NULL, NULL, '/storage/images/defaultprofile.png')";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT USER';
                     var_dump($query);
