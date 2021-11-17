@@ -351,13 +351,19 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE ANNOUNCEMENTS';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = INSERT_COMMAND.' `'.$data->db_prefix."announcements` (`id`, `active`, `title`, `message`, `link`, `type`) VALUES
-        (1, 1, 'Welcome to Saturn', 'Welcome to your new Saturn installation.', 'https://saturncms.net', 'NOTIFICATION'),
+        (1, 0, 'Welcome to Saturn', 'Welcome to your new Saturn installation.', 'https://saturncms.net', 'NOTIFICATION'),
         (2, 0, 'Announcement', 'x', 'https://saturncms.net', 'NOTIFICATION');";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT INTO ANNOUNCEMENTS';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix."articles` (
@@ -371,6 +377,9 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE ARTICLES';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'chats_messages` (
@@ -384,6 +393,9 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE CHATS MESSAGES';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'notifications` (
@@ -397,47 +409,41 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE NOTIFICATIONS';
-                    var_dump($query);
-                } 
-                $query = CREATE_COMMAND.' `'.$data->db_prefix."pages` (
-          `id` int(11) NOT NULL AUTO_INCREMENT,
-          `user_id` int(11) NOT NULL,
-          `category_id` int(11) DEFAULT NULL,
-          `url` varchar(255) DEFAULT NULL,
-          `template` varchar(20) NOT NULL DEFAULT 'DEFAULT',
-          `title` varchar(100) DEFAULT NULL,
-          `description` varchar(255) DEFAULT NULL,
-          `content` varchar(50000) DEFAULT NULL,
-          `reference` varchar(10000) DEFAULT NULL,
-           PRIMARY KEY (`id`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
-                if (!mysqli_query($conn, $query)) {
-                    echo '<br><br>UNABLE TO QUERY: CREATE PAGES';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix."pages` (
           `id` int(11) NOT NULL AUTO_INCREMENT,
           `user_id` int(11) NOT NULL,
           `category_id` int(11) DEFAULT NULL,
-          `url` varchar(255) DEFAULT NULL,
+          `url` varchar(64) DEFAULT NULL,
           `template` varchar(20) NOT NULL DEFAULT 'DEFAULT',
           `title` varchar(100) DEFAULT NULL,
-          `description` varchar(255) DEFAULT NULL,
+          `description` varchar(127) DEFAULT NULL,
           `content` varchar(50000) DEFAULT NULL,
           `reference` varchar(10000) DEFAULT NULL,
-          `image_url` varchar(255) DEFAULT NULL,
+          `image_url` varchar(127) DEFAULT NULL,
           `image_credit` varchar(64) DEFAULT NULL,
-          `image_license` varchar(64) NOT NULL
+          `image_license` varchar(64) NOT NULL,
            PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 if (!mysqli_query($conn, $query)) {
-                    echo '<br><br>UNABLE TO QUERY: CREATE PAGES';
+                    echo '<br><br>UNABLE TO QUERY: CREATE PAGES<br>Error: ';
+                    echo mysqli_error($conn);
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = INSERT_COMMAND.' `'.$data->db_prefix."pages` (`id`, `user_id`, `category_id`, `url`, `template`, `title`, `description`, `content`, `reference`) VALUES
         (1, 1, 1, '/', 'HOMEPAGE', 'Home', 'Home', '<p>Welcome to Saturn - the Content Management System for educators, publishers, writers, creatives, developers, and everyone in between.<br><br>We&apos;re super excited that you&apos;ve decided to use Saturn on your website, so let&apos;s get started.<br><br>You can edit you website in the Saturn Control Panel, to find this navigate to example.com/panel, some themes (such as our default theme Andromeda) may also have a link to the panel in the footer. The control panel allows you to manage the website&apos;s content, view your statistics, see your profile and the profile of others plus so much more.<br><br>You can also visit the Admin Panel by clicking on your profile photo in the control panel and selecting website settings or by navigating there manually (example.com/panel/admin). The admin panel allows you to manage the website&apos; settings, users along with your website&apos; branding (that includes your site logo, which is currently not set - you should set that soon!).<br><br>If you need any assistance please email support@lmwn.co.uk or visit docs.saturncms.net<br><br>Thank you for using Saturn.</p>', '');";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT INTO PAGES';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'pages_categories` (
@@ -448,12 +454,18 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE PAGES CATEGORIES';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = INSERT_COMMAND.' `'.$data->db_prefix."pages_categories` (`id`, `name`, `homepage_id`) VALUES
         (1, 'Site Home', 1);";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT INTO PAGES CATEGORIES';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'pages_history` (
@@ -465,6 +477,9 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE PAGES HISTORY';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'pages_pending` (
@@ -474,19 +489,22 @@ if (isset($_POST['submit'])) {
           `title` varchar(100) DEFAULT NULL,
           `content` varchar(50000) DEFAULT NULL,
           `reference` varchar(10000) DEFAULT NULL,
-          `image_url` varchar(255) DEFAULT NULL,
-          `image_credit` varchar(64) DEFAULT NULL,
-          `image_license` varchar(64) DEFAULT NULL,
            PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE PAGES PENDING';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = INSERT_COMMAND.' `'.$data->db_prefix.'pages_pending` (`id`, `user_id`, `category_id`, `title`, `content`, `reference`) VALUES
         (1, 0, 1, NULL, NULL, NULL);';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT INTO PAGES PENDING';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix."users` (
@@ -497,7 +515,7 @@ if (isset($_POST['submit'])) {
           `email` varchar(255) NOT NULL,
           `password` varchar(512) DEFAULT NULL,
           `user_key` varchar(512) DEFAULT NULL,
-          `last_login_ip` varchar(512) NOT NULL DEFAULT '000.000.0.0',
+          `last_login_ip` varchar(512) NOT NULL DEFAULT 'NONE FOUND',
           `auth_code` varchar(6) DEFAULT NULL,
           `role_id` int(1) DEFAULT NULL,
           `last_seen` datetime NOT NULL DEFAULT current_timestamp(),
@@ -510,6 +528,9 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE USERS';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'users_settings` (
@@ -523,6 +544,9 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE USER SETTINGS';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = INSERT_COMMAND.' `'.$data->db_prefix."users_settings` (
@@ -535,6 +559,9 @@ if (isset($_POST['submit'])) {
                 (NULL, '1', '0', '0', '0', '0')";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT INTO USER SETTINGS';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = CREATE_COMMAND.' `'.$data->db_prefix.'users_statistics` (
@@ -546,18 +573,27 @@ if (isset($_POST['submit'])) {
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: CREATE USER STATISTICS';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 $query = INSERT_COMMAND.' `'.$data->db_prefix."users_statistics` (`id`, `views`, `edits`, `approvals`) VALUES (NULL, '0', '0', '0')";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT INTO USER STATISTICS';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
                 echo'</span>';
 
-                $query = INSERT_COMMAND.' `'.$data->db_prefix."users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `user_key`, `last_login_ip`, `auth_code`, `role_id`, `last_seen`, `first_login`, `bio`, `organisation`, `website`, `profile_photo`) VALUES (NULL, '".$data->user_username."', '".$data->user_firstname."', '".$data->user_lastname."', '".$data->user_email."', '".$data->user_password."', NULL, NULL, NULL, '4', current_timestamp(), '1', NULL, NULL, NULL, '/storage/images/defaultprofile.png')";
+                $query = INSERT_COMMAND.' `'.$data->db_prefix."users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `user_key`, `last_login_ip`, `auth_code`, `role_id`, `last_seen`, `first_login`, `bio`, `organisation`, `website`, `profile_photo`) VALUES (NULL, '".$data->user_username."', '".$data->user_firstname."', '".$data->user_lastname."', '".$data->user_email."', '".$data->user_password."', NULL, 'NONE FOUND', NULL, '4', current_timestamp(), '1', NULL, NULL, NULL, '/storage/images/defaultprofile.png')";
                 if (!mysqli_query($conn, $query)) {
                     echo '<br><br>UNABLE TO QUERY: INSERT USER';
+                    echo '<br>';
+                    echo mysqli_error($conn);
+                    echo '<br>';
                     var_dump($query);
                 }
 
@@ -592,7 +628,7 @@ if (isset($_POST['submit'])) {
             const DATABASE_PREFIX = '".$data->db_prefix."';
             /* Email */
             const CONFIG_EMAIL_ADMIN = '".$data->user_email."';
-            const CONFIG_EMAIL_FUNCTION = 'PHP_MAIL';
+            const CONFIG_EMAIL_FUNCTION = 'phpmail';
             const CONFIG_EMAIL_SENDFROM = '".$data->email_sendfrom."';
             /* Editing */
             const CONFIG_PAGE_APPROVALS = true;
