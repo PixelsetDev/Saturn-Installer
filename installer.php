@@ -474,6 +474,9 @@ if (isset($_POST['submit'])) {
           `title` varchar(100) DEFAULT NULL,
           `content` varchar(50000) DEFAULT NULL,
           `reference` varchar(10000) DEFAULT NULL,
+          `image_url` varchar(255) DEFAULT NULL,
+          `image_credit` varchar(64) DEFAULT NULL,
+          `image_license` varchar(64) DEFAULT NULL,
            PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
                 if (!mysqli_query($conn, $query)) {
