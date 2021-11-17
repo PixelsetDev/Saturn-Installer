@@ -131,7 +131,7 @@ if (isset($_POST['submit'])) {
                                 Install Saturn
                             </a>
                             <br>
-                            <span class="text-xs">Installer for Saturn V0.1.0</span>
+                            <span class="text-xs">Installer for Saturn '.VERSION.'</span>
                         </div>
                     </div>';
             } elseif ($_GET['step'] == 'setup') {
