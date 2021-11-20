@@ -5,7 +5,7 @@
     const CREATE_COMMAND = 'CREATE TABLE';
     const INSERT_COMMAND = 'INSERT INTO';
     
-    $key = file_get_contents('key.txt');
+    $key = '';
 
 function downloadSaturnFile($downloadUrl, $downloadTo, $deleteArchive = true): bool
 {
@@ -426,7 +426,7 @@ if (isset($_POST['submit'])) {
           `reference` varchar(10000) DEFAULT NULL,
           `image_url` varchar(127) DEFAULT NULL,
           `image_credit` varchar(64) DEFAULT NULL,
-          `image_license` varchar(64) NOT NULL,
+          `image_license` varchar(64) DEFAULT NULL,
            PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 if (!mysqli_query($conn, $query)) {
@@ -655,6 +655,9 @@ if (isset($_POST['submit'])) {
             const LOGGING_AUTOLOG = false;
             /* Developer Tools */
             const CONFIG_DEBUG = false;
+            /* Updating */
+            const CONFIG_UPDATE_CHECK = true;
+            const CONFIG_UPDATE_AUTO = true;
             /* Permissions */
             const PERMISSION_CREATE_CATEGORY = '4';
             const PERMISSION_CREATE_PAGE = '4';
