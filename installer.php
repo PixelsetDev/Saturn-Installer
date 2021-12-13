@@ -1,6 +1,6 @@
 <?php
     // Settings
-    const VERSION = '0.1.0';
+    const VERSION = '0.1.1';
     const INSTALLER_CONFIG_FILE = 'installer_config.json';
     const CREATE_COMMAND = 'CREATE TABLE';
     const INSERT_COMMAND = 'INSERT INTO';
