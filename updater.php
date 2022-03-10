@@ -124,6 +124,9 @@ class Updater {
     const LOGGING_AUTOLOG = ".(bool)LOGGING_AUTOLOG.";
     /* Developer Tools */
     const CONFIG_DEBUG = ".(bool)CONFIG_DEBUG.";
+    /* Updating */
+    const CONFIG_UPDATE_CHECK = true;
+    const CONFIG_UPDATE_AUTO = true;
     /* Permissions */
     const PERMISSION_CREATE_CATEGORY = '".PERMISSION_CREATE_CATEGORY."';
     const PERMISSION_CREATE_PAGE = '".PERMISSION_CREATE_PAGE."';
