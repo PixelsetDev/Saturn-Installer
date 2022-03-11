@@ -141,7 +141,7 @@ class Updater {
         exit;
     }
 
-    public function __construct() {
+    public function UpdateSaturn() {
         ob_start();
 
         if (isset($_GET['Status'])) {
@@ -273,4 +273,5 @@ class Updater {
     }
 }
 
-new Updater();
+$Updater = new Updater();
+$Updater->UpdateSaturn();
