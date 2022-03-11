@@ -1,11 +1,13 @@
 <?php
+
 namespace Saturn;
 
 use ZipArchive;
 
-class Updater {
-
-    public function Download() {
+class Updater
+{
+    public function Download()
+    {
         $remoteVersion = file_get_contents('https://link.saturncms.net/?latest_version');
 
         $downloadUrl = 'https://saturncms.net/download/update/'.$remoteVersion.'.zip';
@@ -37,22 +39,25 @@ class Updater {
         exit;
     }
 
-    public function Delete_Item($directory) {
+    public function Delete_Item($directory)
+    {
         if (is_dir($directory)) {
             $objects = scandir($directory);
             foreach ($objects as $object) {
-                if ($object != "." && $object != "..") {
-                    if (is_dir($directory. DIRECTORY_SEPARATOR .$object) && !is_link($directory."/".$object))
-                        $this->Delete_Item($directory. DIRECTORY_SEPARATOR .$object);
-                    else
-                        unlink($directory. DIRECTORY_SEPARATOR .$object);
+                if ($object != '.' && $object != '..') {
+                    if (is_dir($directory.DIRECTORY_SEPARATOR.$object) && !is_link($directory.'/'.$object)) {
+                        $this->Delete_Item($directory.DIRECTORY_SEPARATOR.$object);
+                    } else {
+                        unlink($directory.DIRECTORY_SEPARATOR.$object);
+                    }
                 }
             }
             rmdir($directory);
         }
     }
 
-    public function Reset_Installation() {
+    public function Reset_Installation()
+    {
         $items = scandir(__DIR__);
 
         foreach ($items as $item) {
@@ -62,7 +67,8 @@ class Updater {
         }
     }
 
-    public function Reset_Config($send_data) {
+    public function Reset_Config($send_data)
+    {
         include 'config.php';
         $file = __DIR__.'/config.php';
         $message = "<?php
@@ -85,9 +91,9 @@ class Updater {
     const CONFIG_SITE_KEYWORDS = '".CONFIG_SITE_KEYWORDS."';
     const CONFIG_SITE_CHARSET = '".CONFIG_SITE_CHARSET."';
     const CONFIG_SITE_TIMEZONE = '".CONFIG_SITE_TIMEZONE."';
-    const CONFIG_SEND_DATA = ".(bool)$send_data.";
+    const CONFIG_SEND_DATA = ".(bool) $send_data.';
     /* Users and Accounts */
-    const CONFIG_REGISTRATION_ENABLED = ".(bool)CONFIG_REGISTRATION_ENABLED.";
+    const CONFIG_REGISTRATION_ENABLED = '.(bool) CONFIG_REGISTRATION_ENABLED.";
     /* Database */
     const DATABASE_HOST = '".DATABASE_HOST."';
     const DATABASE_NAME = '".DATABASE_NAME."';
@@ -101,29 +107,29 @@ class Updater {
     const CONFIG_EMAIL_SENDFROM = '".CONFIG_EMAIL_SENDFROM."';
     /* Editing */
     const CONFIG_PAGE_APPROVALS = '".CONFIG_PAGE_APPROVALS."';
-    const CONFIG_ARTICLE_APPROVALS = ".(bool)CONFIG_ARTICLE_APPROVALS.";
+    const CONFIG_ARTICLE_APPROVALS = ".(bool) CONFIG_ARTICLE_APPROVALS.";
     const CONFIG_MAX_TITLE_CHARS = '".CONFIG_MAX_TITLE_CHARS."';
     const CONFIG_MAX_PAGE_CHARS = '".CONFIG_MAX_PAGE_CHARS."';
     const CONFIG_MAX_ARTICLE_CHARS = '".CONFIG_MAX_ARTICLE_CHARS."';
     const CONFIG_MAX_REFERENCES_CHARS = '".CONFIG_MAX_REFERENCES_CHARS."';
     /* Notifications */
     const CONFIG_NOTIFICATIONS_LIMIT = '".CONFIG_NOTIFICATIONS_LIMIT."';
-    const CONFIG_ALLOW_SATURN_NOTIFICATIONS = ".(bool)CONFIG_ALLOW_SATURN_NOTIFICATIONS.";
-    const CONFIG_ALLOW_EMAIL_NOTIFICATIONS = ".(bool)CONFIG_ALLOW_EMAIL_NOTIFICATIONS.";
+    const CONFIG_ALLOW_SATURN_NOTIFICATIONS = ".(bool) CONFIG_ALLOW_SATURN_NOTIFICATIONS.';
+    const CONFIG_ALLOW_EMAIL_NOTIFICATIONS = '.(bool) CONFIG_ALLOW_EMAIL_NOTIFICATIONS.';
     /* Welcome Screen */
-    const CONFIG_WELCOME_SCREEN = ".(bool)CONFIG_WELCOME_SCREEN.";
-    const CONFIG_WELCOME_SCREEN_SHOW_TERMS = ".(bool)CONFIG_WELCOME_SCREEN_SHOW_TERMS.";
+    const CONFIG_WELCOME_SCREEN = '.(bool) CONFIG_WELCOME_SCREEN.';
+    const CONFIG_WELCOME_SCREEN_SHOW_TERMS = '.(bool) CONFIG_WELCOME_SCREEN_SHOW_TERMS.';
     /* Security */
-    const SECURITY_ACTIVE = ".(bool)SECURITY_ACTIVE.";
+    const SECURITY_ACTIVE = '.(bool) SECURITY_ACTIVE.";
     const SECURITY_MODE = '".SECURITY_MODE."';
     const SECURITY_USE_HTTPS = ".SECURITY_USE_HTTPS.';
-    const SECURITY_USE_GSS = '.(bool)SECURITY_USE_GSS.";
+    const SECURITY_USE_GSS = '.(bool) SECURITY_USE_GSS.";
     const SECURITY_DEFAULT_HASH = '".SECURITY_DEFAULT_HASH."';
     const SECURITY_CHECKSUM_HASH = '".SECURITY_CHECKSUM_HASH."';
-    const LOGGING_ACTIVE = ".(bool)LOGGING_ACTIVE.";
-    const LOGGING_AUTOLOG = ".(bool)LOGGING_AUTOLOG.";
+    const LOGGING_ACTIVE = ".(bool) LOGGING_ACTIVE.';
+    const LOGGING_AUTOLOG = '.(bool) LOGGING_AUTOLOG.';
     /* Developer Tools */
-    const CONFIG_DEBUG = ".(bool)CONFIG_DEBUG.";
+    const CONFIG_DEBUG = '.(bool) CONFIG_DEBUG.";
     /* Updating */
     const CONFIG_UPDATE_CHECK = true;
     const CONFIG_UPDATE_AUTO = true;
@@ -141,12 +147,13 @@ class Updater {
         exit;
     }
 
-    public function UpdateSaturn() {
+    public function UpdateSaturn()
+    {
         ob_start();
 
         if (isset($_GET['Status'])) {
             if ($_GET['Status'] == 'Reset_Config') {
-?>
+                ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -185,8 +192,7 @@ class Updater {
                 $this->Reset_Installation();
                 $this->Download();
             } elseif ($_GET['Status'] == 'Done') {
-                unlink('update.php');
-?>
+                unlink('update.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -213,7 +219,7 @@ class Updater {
 </html>
 <?php
             } else {
-?>
+                ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -239,7 +245,7 @@ class Updater {
 <?php
             }
         } elseif (isset($_GET['ErrorMsg'])) {
-?>
+            ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
