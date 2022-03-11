@@ -157,7 +157,7 @@ class Updater {
     <body>
         <center>
 			<br><br>
-			<i class="fa-solid fa-chart-line fa-5x"></i>
+			<i class="fa-solid fa-chart-line fa-5x" aria-hidden="true"></i>
 			<br><br>
             <h1 class="font-bold text-2xl">
                 Saturn Diagnostics and Usage Data
@@ -197,7 +197,7 @@ class Updater {
     <body>
         <center>
 			<br><br>
-			<i class="fa-solid fa-circle-check fa-5x"></i>
+			<i class="fa-solid fa-circle-check fa-5x" aria-hidden="true"></i>
 			<br><br>
             <h1 class="font-bold text-2xl">
                 Saturn has been updated
@@ -224,7 +224,7 @@ class Updater {
     <body>
         <center>
 			<br><br>
-			<i class="fa-solid fa-circle-xmark fa-5x"></i>
+			<i class="fa-solid fa-circle-xmark fa-5x" aria-hidden="true"></i>
 			<br><br>
             <h1 class="font-bold text-2xl">
                 There was a problem whilst updating Saturn.
@@ -250,7 +250,7 @@ class Updater {
     <body>
         <center>
 			<br><br>
-			<i class="fa-solid fa-circle-xmark fa-5x"></i>
+			<i class="fa-solid fa-circle-xmark fa-5x" aria-hidden="true"></i>
 			<br><br>
             <h1 class="font-bold text-2xl">
                 There was a problem whilst updating Saturn.
