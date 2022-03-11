@@ -263,7 +263,7 @@ class Updater
             </h1>
 			<br>
             <p>
-                <?php echo $_GET['ErrorMsg']; ?><br>
+                <?php echo htmlspecialchars($_GET['ErrorMsg']); ?><br>
                 <br>
                 <a href="/panel/admin" class="px-4 py-2 bg-blue-500 shadow hover:shadow-xl rounded-lg text-white transition duration-200">Back to the Admin Panel</a>
             </p>
