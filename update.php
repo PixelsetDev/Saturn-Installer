@@ -162,7 +162,7 @@ class Updater
 		<script src="https://kit.fontawesome.com/f7a3170e6f.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <center>
+        <div class="text-center w-full">
 			<br><br>
 			<i class="fa-solid fa-chart-line fa-5x" aria-hidden="true"></i>
 			<br><br>
@@ -177,7 +177,7 @@ class Updater
                 <a href="update.php?Status=Data_Consent&Yes" class="px-4 py-2 bg-blue-500 shadow hover:shadow-xl rounded-lg text-white transition duration-200">Share Data with Saturn</a><br><br>
 				<a href="update.php?Status=Data_Consent&No" class="text-blue-500">Don't share</a>
             </p>
-        </center>
+        </div>
     </body>
 </html>
 <?php
@@ -201,7 +201,7 @@ class Updater
 		<script src="https://kit.fontawesome.com/f7a3170e6f.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <center>
+        <div class="text-center w-full">
 			<br><br>
 			<i class="fa-solid fa-circle-check fa-5x" aria-hidden="true"></i>
 			<br><br>
@@ -214,7 +214,7 @@ class Updater
                 <br>
                 <a href="/panel/admin" class="px-4 py-2 bg-blue-500 shadow hover:shadow-xl rounded-lg text-white transition duration-200">Back to the Admin Panel</a>
             </p>
-        </center>
+        </div>
     </body>
 </html>
 <?php
@@ -228,7 +228,7 @@ class Updater
 		<script src="https://kit.fontawesome.com/f7a3170e6f.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <center>
+        <div class="text-center w-full">
 			<br><br>
 			<i class="fa-solid fa-circle-xmark fa-5x" aria-hidden="true"></i>
 			<br><br>
@@ -239,7 +239,7 @@ class Updater
             <p>
                 <a href="/panel/admin" class="px-4 py-2 bg-blue-500 shadow hover:shadow-xl rounded-lg text-white transition duration-200">Back to the Admin Panel</a>
             </p>
-        </center>
+        </div>
     </body>
 </html>
 <?php
@@ -254,7 +254,7 @@ class Updater
 		<script src="https://kit.fontawesome.com/f7a3170e6f.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <center>
+        <div class="text-center w-full">
 			<br><br>
 			<i class="fa-solid fa-circle-xmark fa-5x" aria-hidden="true"></i>
 			<br><br>
@@ -267,7 +267,7 @@ class Updater
                 <br>
                 <a href="/panel/admin" class="px-4 py-2 bg-blue-500 shadow hover:shadow-xl rounded-lg text-white transition duration-200">Back to the Admin Panel</a>
             </p>
-        </center>
+        </div>
     </body>
 </html>
 <?php
